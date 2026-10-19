@@ -1,0 +1,49 @@
+
+name: Daily scholarship scraper and bot
+
+on:
+  schedule:
+    # Every day at 8:17 AM Eastern
+    - cron: "00 11 * * *"
+      timezone: "America/New_York"
+
+  # Lets you test it manually from GitHub
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scrape-and-post:
+    runs-on: ubuntu-latest
+
+    env:
+      SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
+      WORKSHEET_NAME: ${{ secrets.WORKSHEET_NAME }}
+      GROUPME_BOT_ID: ${{ secrets.GROUPME_BOT_ID }}
+
+    steps:
+      - name: Download project code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Create Google credentials file
+        env:
+          GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+        run: |
+          printf '%s' "$GOOGLE_CREDENTIALS_JSON" > credentials.json
+
+      - name: Scrape scholarships
+        run: python she2.py
+
+      - name: Post new scholarships to GroupMe
+        run: python groupmeBot2.py
