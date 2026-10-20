@@ -3,7 +3,7 @@ name: Daily scholarship scraper and bot
 
 on:
   schedule:
-    # Every day at 8:17 AM Eastern
+    # Every day at 11:00 AM Eastern
     - cron: "00 11 * * *"
       timezone: "America/New_York"
 
