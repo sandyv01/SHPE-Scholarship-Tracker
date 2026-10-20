@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+import time
+import random
 
 import gspread
 import requests
@@ -93,29 +95,55 @@ for row_number, row in enumerate(data[1:], start=2):
 
     message = "\n".join(message_parts)
 
-    #post
-    response = requests.post(
-        "https://api.groupme.com/v3/bots/post",
-        json={"bot_id": BOT_ID, "text": message},
-        timeout=30,
-    )
+    #post 
+    max_attempts = 5
+    success = False
 
-    #check is successfull post
-    if response.status_code != 202:
-        print(
-            f"POST FAILED: {name} "
-            f"({response.status_code}): {response.text}"
-        )
+    for attempt in range(max_attempts):
+        try:
+            response = requests.post(
+                "https://api.groupme.com/v3/bots/post",
+                json={"bot_id": BOT_ID, "text": message},
+                timeout=30,
+            )
+
+            if response.status_code == 202:
+                #mark posted after groupme sends the message
+                sheet.update_cell(row_number, posted_col, True)
+
+                posted_count += 1
+                print(f"Posted and checked checkbox: {name}")
+                success = True
+                break
+
+            if response.status_code == 429:
+                #if github blocks then retry w break time
+                wait_time = min(30 * (2 ** attempt), 300) + random.uniform(0, 3)
+                print(
+                    f"Rate limited: {name}. "
+                    f"Retry {attempt + 1}/{max_attempts} "
+                    f"in {wait_time:.1f} seconds."
+                )
+                time.sleep(wait_time)
+                continue
+
+            print(
+                f"POST FAILED: {name} "
+                f"({response.status_code}): {response.text}"
+            )
+            break
+
+        except requests.RequestException as error:
+            wait_time = min(10 * (2 ** attempt), 120)
+            print(
+                f"Request error for {name}: {error}. "
+                f"Retrying in {wait_time} seconds."
+            )
+            time.sleep(wait_time)
+
+    if not success:
         skipped_count += 1
-        continue
+        print(f"Could not post after retries: {name}")
 
-    #update sheets with checkmark under posted
-    sheet.update_cell(row_number, posted_col, True)
-
-    posted_count += 1
-    print(f"Posted and checked checkbox: {name}")
-
-#debugging info
-print("\nFinished!")
-print(f"New scholarships posted: {posted_count}")
-print(f"Scholarships skipped or failed: {skipped_count}")
+    #break time
+    time.sleep(10)
