@@ -6,7 +6,7 @@ A Python-based scholarship tracker that scrapes [Scholarship360](https://scholar
 
 The goal of this project is to help SHPE members discover scholarship opportunities by automating the process of finding, organizing, and sharing scholarships with students.
 
-The scraper collects scholarship information from Scholarship360, filters opportunities based on configured eligibility criteria, and saves the results to a Google Sheet. A GroupMe bot then shares approved, eligible scholarships with the SHPE community.
+The scraper collects scholarship information from Scholarship360, filters opportunities based on configured eligibility criteria, and saves the results to a Google Sheet. A GroupMe bot then shares open scholarships with the SHPE community.
 
 ## Features
 
