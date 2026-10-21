@@ -11,10 +11,8 @@ The scraper collects scholarship information from Scholarship360, filters opport
 ## Features
 
 - **Automated scraping:** Collects scholarship opportunities from Scholarship360.
-- **Google Sheets integration:** Organizes scholarship details in a centralized tracker.
-- **Eligibility filtering:** Filters scholarships based on configured criteria, including location and student eligibility.
+- **Google Sheets integration:** Organizes scholarship details in a centralized tracker..
 - **Deadline tracking:** Tracks deadlines and identifies open, upcoming, and closed opportunities.
-- **Manual approval:** Allows scholarships to be reviewed before being shared.
 - **GroupMe integration:** Posts eligible scholarships to the SHPE GroupMe.
 - **Duplicate prevention:** Tracks previously posted scholarships to avoid repeatedly sharing the same opportunities.
 - **Scheduled execution:** Supports automated daily runs through GitHub Actions.
@@ -25,7 +23,7 @@ The scraper collects scholarship information from Scholarship360, filters opport
 - **Requests** — retrieving webpage content and communicating with APIs
 - **Beautiful Soup** — parsing scholarship webpages
 - **gspread** — Google Sheets integration
-- **Google Sheets** — scholarship database and approval tracker
+- **Google Sheets** — scholarship database and posted tracker
 - **GroupMe Bot API** — posting scholarship opportunities
 - **GitHub Actions** — scheduled automation
 
