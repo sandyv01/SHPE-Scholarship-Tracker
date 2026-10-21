@@ -60,7 +60,7 @@ The spreadsheet serves as the central database for scholarship opportunities. De
 | Description | Scholarship details |
 | Link | Application or information URL |
 | Status | Deadline-based status |
-| Location-Based Flags | Eligibility or category labels |
+| Location-Based Flags | Checks locations mentioned |
 | Posted | Whether it has been posted to GroupMe |
 
 ## Setup
