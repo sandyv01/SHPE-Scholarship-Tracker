@@ -63,11 +63,8 @@ The spreadsheet serves as the central database for scholarship opportunities. De
 | Description | Scholarship details |
 | Link | Application or information URL |
 | Status | Deadline-based status |
-| Flags | Eligibility or category labels |
-| Approved | Whether the scholarship is approved for sharing |
+| Location-Based Flags | Eligibility or category labels |
 | Posted | Whether it has been posted to GroupMe |
-
-Checkboxes for approval and posting help keep the review and announcement process organized.
 
 ## Setup
 
@@ -131,7 +128,7 @@ This retrieves scholarship listings and updates the Google Sheet.
 python groupmeBot2.py
 ```
 
-This checks the spreadsheet for scholarships eligible to be shared and posts them to the SHPE GroupMe according to the bot's configured approval and posting rules.
+This checks the spreadsheet for scholarships eligible to be shared and posts them to the SHPE GroupMe according to the bot's configured posting rules.
 
 ## Automated Workflow
 
