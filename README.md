@@ -45,8 +45,7 @@ The scraper collects scholarship information from Scholarship360, filters opport
 1. **Scrape:** Retrieve scholarship listings from selected Scholarship360 pages.
 2. **Filter:** Evaluate scholarships using configured criteria and deadline rules.
 3. **Store:** Add or update scholarship information in Google Sheets.
-4. **Review:** Review opportunities and mark scholarships as approved.
-5. **Share:** The GroupMe bot posts eligible, approved scholarships that have not already been posted.
+5. **Share:** The GroupMe bot posts eligible scholarships that have not already been posted.
 6. **Track:** Update the spreadsheet to record posted scholarships and prevent duplicate announcements.
 
 ## Google Sheets
@@ -126,7 +125,7 @@ This retrieves scholarship listings and updates the Google Sheet.
 python groupmeBot2.py
 ```
 
-This checks the spreadsheet for scholarships eligible to be shared and posts them to the SHPE GroupMe according to the bot's configured posting rules.
+This checks the spreadsheet for scholarships eligible to be shared and posts them to the SHPE GroupMe according to the bot's configured posting rules and updates 'posted' checkbox for that scholarship on Google Sheets.
 
 ## Automated Workflow
 
@@ -146,7 +145,6 @@ You can also trigger the workflow manually from the **Actions** tab if `workflow
 ## Data and Usage Notes
 
 - Scholarship listings and eligibility requirements may change. Verify application details on the scholarship provider's website before applying.
-- Review opportunities before posting them to the SHPE community.
 - Scraping should follow Scholarship360's applicable terms, access restrictions, and rate limits.
 - Keep credentials private and grant the Google service account access only to the spreadsheet it needs.
 
